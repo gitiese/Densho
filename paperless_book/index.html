@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Wnr7AcuHdUEDqcZm0clUvdLGbRBkES-IRLbv96VXg_g" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>HTML Converter for EPUB</title>
+    <style>
+    textarea {width:500px; height:400px; margin:0 20px}
+    form {display:inline-block; vertical-align: top; margin: 0 0 20px;}
+    p {display:inline-block; vertical-align: top;}
+    .user_box { display: block; padding: 20px; width: auto; border: 3px dashed #ccc; background: #f8f8f8; margin: 0 20px;}
+    input[type="text"]{width:300px;}
+    a:before , a:after { width: 18px; height: 25px; display: inline-block; }
+    a[aria-expanded="true"]:before{content: '-'; }
+    a[aria-expanded="false"]:before{content: '+'; }
+    label.RevBox { padding: 5px 18px;  background-color: rgb(107, 107, 107); color:#fff; margin: 0; transform: translate(-6px ,2px); z-index: 0; font-size: 1.5rem;}
+    div#setMessage { display: none; }
+    div.message { animation: fade 1s; width: auto; padding: 20px; margin: 0 20px; background: #d7ffe4;} 
+    div.message:has(span.correct) { animation: fade 3s;} 
+    div.message span { display: block; animation: fade 5s; width: fit-content; margin: 0 auto 0; padding: 10px; } 
+    div.message .correct { background-Color: rgb(255, 255, 255); animation: fade;  animation-duration: 1s; animation-direction: alternate;} 
+    div.message .activate { background-Color: rgb(255, 181, 152); animation: fade .1s; animation-direction: alternate; } 
+    @keyframes fade { 0% { opacity:0; } 50% { opacity:.4; } 100% { opacity:1; }}
+    p#DLButton { display: block; margin: 0 auto 0; width: fit-content; }
+    p#DLButton a { display: inline-block; padding: 19px 45px;  margin: 20px auto; background: #cecece; color: #000;  border-radius: 20px; box-shadow: inset -3px -3px 9px 0px #e0f6e6; font-weight:bold; }
+    </style>
+  </head>
+  <body class="container">
+    <h1 class="mt-3 mb-5"> HTML Converter for EPUB</h1>
+    
+     <form name ="BeforeContent">
+     <label for="before" class="RevBox">Before</label><br>
+     <textarea name="BeforeHTML" id="text" >ファイルを選択すると変換前のHTMLが表示されます。</textarea><br>
+     <div class="user_box">
+      <input type="file" id="inputfile" class="m-2 mb-4"><input type="button" value="変換する" id="submit" class="m-2">
+        <div class="mt-2 mb-1">
+                削除除外クラス<a class="btn btn-info rounded-circle py-0 px-1 mx-2" data-toggle="collapse" href="#add1" role="button" aria-expanded="false" aria-controls="add_cont1"></a>
+                <div class="collapse" id="add1">
+                <div class="input-group-prepend m-3"><span class="input-group-text" id="basic-addon1">class:</span><input type="text" name="exc_class" class="exc_class" size="20" maxlength="200" aria-describedby="basic-addon1" data-toggle="tooltip" title="複数指定の場合はカンマ区切りで入力してください。" data-placement="right"></div>
+                </div>
+        </div>
+        <div class="mt-2 mb-1">
+                段落除外クラス<a class="btn btn-info rounded-circle py-0 px-1 mx-2" data-toggle="collapse" href="#add2" role="button" aria-expanded="false" aria-controls="add_cont2"></a>
+                <div class="collapse" id="add2">
+                <div class="input-group-prepend m-3"><span class="input-group-text" id="basic-addon1">文字列:</span><input type="text" name="exc_PrgIn" class="exc_PrgIn" size="20" maxlength="200" aria-describedby="basic-addon1" data-toggle="tooltip" title="複数指定の場合はカンマ区切りで入力してください。" data-placement="right"></div>
+                </div>
+        </div>
+        <div class="my-2">
+                タイトル<a class="btn btn-info rounded-circle py-0 px-1 mx-2" data-toggle="collapse" href="#add3" role="button" aria-expanded="false" aria-controls="add_cont3"></a>
+                <div class="collapse" id="add3">
+                    <div class="input-group-prepend m-3"><span class="input-group-text" id="basic-addon1">title:</span><input type="text" name="setTitle" class="setTitle" size="20" maxlength="200" aria-describedby="basic-addon1"></div>
+                </div>
+        </div>
+        <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" name="Select_num_LtoU">
+              <label class="form-check-label" for="defaultCheck1">
+                ３桁以上の数字を全角に変換する
+              </label>
+        </div>
+     </div>
+     </form>
+     
+     <form name ="AfterContent">
+     <label for="after" class="RevBox">After</label><br>
+     <textarea name="AfterHTML" id="text2">
+     </textarea><div id ="setMessage" class=""></div>
+     </form>
+
+     <div class="my-5 d-flex flex-column">
+     <p>2020/08/05  ＊次の機能を追加　半角数字二桁以上の文字列を任意で全角にする</p>
+     <p>2020/06/17  ＊次の機能を追加　半角数字二桁までの文字列を&lt;span class="tcy"&gt;&lt;/span&gt;で囲む</p>
+     <p>2020/06/16  ＊次の機能を追加　タグの後ろに全角スペースを挿入する(例外 : カッコつき文章)</p>
+     <p>2020/06/11  ＊次の機能を追加　/&nbsp;&lt;div&gt;,&lt;body&gt;内のid,classタグ削除&nbsp;/&nbsp;任意のタイトル設定&nbsp;/&nbsp;ダウンロード&nbsp;/</p>
+     <p>2020/06/10  ＊1行に複数のclassタグが存在する場合のバグを修正</p>
+     <p>2020/06/09  ＊削除対象除外機能を追加</p>
+     <p>2020/06/08  ＊一部クラスタグの変換機能を追加</p>
+     <p>2020/06/04  ＊プロトタイプ公開</p>
+     </div>
+     
+    <!-- Optional JavaScript -->
+    <script>
+    // データフォーマットをセット
+    var BeforeHTML = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE html>\n<html\n xmlns=\"http://www.w3.org/1999/xhtml\"\n xmlns:epub=\"http://www.idpf.org/2007/ops\"\n xml:lang=\"ja\"\n class=\"vrtl\">\n<head>\n<meta charset=\"UTF-8\"/>\n<title>_title_</title>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../style/book-style.css\"/>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"../style/style-original.css\"/>\n</head>\n_content_\n</html>';
+    const SpecifyClass = /.*?link.*?|noteref.*?|.*?gaiji.*?|fit|kogaki|em-line|k-.*?|h-.*?|v-.*?|m-.*?|p-.*?|start-.*?|end-.*?|.*?measure-.*?|extent-.*?|max-extent-.*?|contents_list|inline.*?|.*?midashi.*?|inyou|kakko|warichu|footnote|dangumi|display-.*?|pagebreak.*?|align-.*?|block-.*?|valign-.*?|hltr|vrtl|vltr|key|ref|fit|tcy|dashed|height.*?|max.*?|width.*?|.*?font.*?|upright.*?|sideways|dashed|super|sub|gaiji.*?|kogaki|kunten.*?|em.*?|bold|italic|color.*?|word.*?|bg.*?|inverse|line.*?|lspacing.*?|indent.*?'/;
+
+
+    //ファイル読み込み
+    const file = document.getElementById('file')
+    
+    inputfile.addEventListener("change", function(e) {
+        const file = e.target.files;
+        var fileName = file[0].name;
+        const reader = new FileReader()
+        reader.readAsText(file[0]);
+
+        // 読み込んだファイルをセット
+        var Start = document.getElementById('submit'); 
+        Start.addEventListener('click', function() {
+            document.getElementById('text').innerHTML = reader.result;
+            document.getElementById('text2').value = BeforeHTML;
+            var message = document.getElementById('setMessage');
+            message.innerHTML = '<div class="message"><span class="activate">変換中です。</span></div>'
+            StrCutOut();
+        });
+
+        // ファイルを行毎に配列にする
+
+        var setTitle = document.getElementsByClassName("setTitle");
+        function StrCutOut() {
+        console.log(file);
+        const textArea = document.getElementById("text").value;
+        console.log(setTitle);
+        var textLine = textArea.split(/\r\n|\r|\n/);
+        console.log( textLine );
+        var BodyRange = [];
+        var RsrvClsHTMLObjs = document.getElementsByClassName("exc_class");
+        var setTitle = document.getElementsByClassName("setTitle");
+        var StrRsrvClsArr = RsrvClsHTMLObjs[0].value.split(',');            // 削除除外クラスを配列にする
+        var PlgInHTMLObjs = document.getElementsByClassName("exc_PrgIn");
+        var StrPlgInArr = PlgInHTMLObjs[0].value.split(',');            // 段落除外クラスを配列にする
+        var setTitle = document.getElementsByClassName("setTitle");
+        var num_LtoU_flag = false; // 選択されているか否かを判定する変数
+ 
+
+        if (document.BeforeContent.Select_num_LtoU.checked) {
+            num_LtoU_flag = true;
+            console.log(num_LtoU_flag)
+        }
+        
+            // 配列を調べるループ
+        for (let i = 0; i < textLine.length; ++i) { 
+            var ClsArr = [];
+            let isBodyTag = /.*<body/.test(textLine[i])
+                if (isBodyTag ) {  // <body>タグを書き換え
+                    console.log(textLine[i])
+                    textLine[i] = textLine[i].replace(/<body.*/, "<body>");
+                }
+
+            let hasBodyTag = /<\/*?body/.test(textLine[i]);
+                if(hasBodyTag) {  // <body>...</body>を切り出し
+                    BodyRange.push(i) ;
+                }
+                
+            // pタグの次にスペースを挿入
+                        var pLine = (/.*?\<p.*/.test(textLine[i]));
+                        var pAfter = textLine[i].replace(/(^.*?>)(.)(.*?)/ , '$2')
+                        if(pLine == true ) {
+                            let pLRgex = /(<p.?class=")(.*?)"(.*)\>/g;
+                            let ClsStr = textLine[i];
+                            let ChkExcPCls;
+                            let ExcPFlg = 0;
+                            let pClassName = ClsStr.match(pLRgex);
+                            if( pClassName !== null ) {
+                                console.log(pClassName[0]);
+                                ClsStr = ClsStr.replace(pLRgex , '$2');
+                                var ClsNameArr = ClsStr.split(' ');
+                                console.log(ClsNameArr);
+                                ChkExcPCls = ClsNameArr.filter(Name => { return  StrPlgInArr.indexOf(Name) !== -1 });
+                                if(ChkExcPCls.length !== 0) { ExcPFlg = true;}
+                            }
+                            
+
+                        if ( pAfter.match(/^<span/) == null ) {
+                            var hasBrackets = pAfter.substr( 0, 1 ).match(/「|『|（|《|＜|≪|【|［|”|〔 〘|｟ |〖 |〈|«|‘ |“|’/);
+                            console.log(hasBrackets);
+                        }else{
+                            let pSpanAfter = pAfter.replace(/(^.*?>)(.)(.*?)/ , '$2')
+                            var hasBrackets = pSpanAfter.substr( 0, 1 ).match(/「|『|（|《|＜|≪|【|［|”|〔 〘|｟ |〖 |〈|«|‘ |“|’/);
+                            console.log(hasBrackets);
+                        }
+                            console.log(pLine , hasBrackets , ExcPFlg);
+                            let c = 0;
+                            // let hasExcPlg = StrPlgInArr.forEach(str => { if(str == pAfter) {c++} });
+                            if((pLine == true && hasBrackets == null ) && ExcPFlg == 0) {
+                                let space = '　';
+                                textLine[i] = textLine[i].replace(/(>)/ ,">　");                                    
+                            }
+                        }
+
+                var hasClassTag = (textLine[i]).match(/(class=".*?")/g);
+                var hasIdTag = (textLine[i]).match(/(id=".*?")/g);
+
+            if (hasClassTag || hasClassTag ) {      
+                let pHasClass = (/.*?\<p\sclass=".*/.test(textLine[i]));
+                let rtHasClass = (/.*?\<rt\sclass=".*/.test(textLine[i]));
+                    if( pHasClass || rtHasClass ) { // class名をチェック
+                        ClsArr = (textLine[i]).match(/(class=".*?")/g);
+                        ClsArr.forEach(str => { // 削除除外リストに入っているか
+                        var ClsName = str.replace(/(class=")/,'').replace(/(")/,'');
+                            if(ClsName !== null) {   
+                                var existCls = 0;
+                                var ClsNameArr = ClsName.split(' ');
+                                var RsrvClsArr = ClsNameArr.filter(Name => { return  StrRsrvClsArr.indexOf(Name) !== -1 || SpecifyClass.test(Name) == true });
+                                        
+                                if (RsrvClsArr.length > 0 ) { // 削除除外対象のクラス名がある場合
+                                        var RsrvStr = RsrvClsArr.join(' ') ;
+                                        console.log( str + ' replace ' + 'class="' + RsrvStr + '"')
+                                        rplTxt = 'class="' + RsrvStr + '"';
+                                        textLine[i] = textLine[i].replace( str , rplTxt ); 
+                                }else{  
+                                    if (RsrvClsArr.length == 0 ) {
+                                        textLine[i] = textLine[i].replace( str , '').replace( /\s>/ , '>'); 
+                                    }
+                                }                                    
+                                var RsrvClsArr = [];
+                                var StrPlgInArr = [];
+                            }
+                        })
+                    }else{
+                    console.log('not have p or rt >' + textLine[i])
+                    textLine[i] = textLine[i].replace(/\sid=".*?"/g, "").replace(/\sclass=".*?"/g, "");
+                    }
+                }
+                var pAfter = textLine[i].match(/(?<=p>)(.*)(?=<)/);
+
+                if (pAfter !== null){
+                    let hasSpanTag = textLine[i].match(/<(span|span class=.*?)>(\d+)/g);
+                        var edited = [];
+                        if ( hasSpanTag !== null) {
+                            console.log(hasSpanTag)
+                            hasSpanTag.forEach (char => {
+                        var regex = /span class=.*?"/;
+                            	console.log (char , regex.test(char))
+                            if ( regex.test(char) == true) {
+                            	console.log (char)
+                                char = char.replace( 'class="' ,'class="tcy ');
+                            } else {
+                                char = char.replace( /span/ , 'span class="tcy"');
+                            }
+                        	edited.push(char)
+                        });
+                            console.log( hasSpanTag,edited)
+                        for(var cnt=0; cnt< hasSpanTag.length; cnt++){
+                                textLine[i] = textLine[i].replace(hasSpanTag[cnt],edited[cnt]);
+                        }
+                    }
+
+                        var regex1 = /(?<=>)(.*?)(\d+)(.*?)(?=<)/g;
+                        var regex2 = /(.)(\d{1,})/g;
+                        var MatchNum1 = textLine[i].match(regex1)
+                        var MatchNum2 = textLine[i].match(regex2)
+                        var edited = [];
+                        if ( MatchNum1 !== null) {
+                            MatchNum2.forEach(char => {
+                                        if ( char.length < 4 && char.substr(0,1) !== ">"){
+                                            console.log(char , char.match(/(\d{1,2})/));    
+                                            if ( char.match(/(\d{1,})/) !== null ){
+                                                console.log(char.match(/(\d{1,})/));
+                                                str_brk = /(\d{1,})/.exec(char)
+                                                var Nstr = '<span class="tcy">' + str_brk[0] + '</span>'
+                                                console.log(Nstr);
+                                                char = char.replace(/\d{1,}/ , Nstr)
+                                            }
+                                        } else {
+                                            if ( char.length > 3 && char.substr(0,1) !== ">" && num_LtoU_flag == true) {
+                                            console.log(char);
+                                            char = char.replace(/[(\d*\d)]/g, function(s){ return String.fromCharCode(s.charCodeAt(0) + 0xFEE0); })
+                                            console.log(char);
+                                            }
+                                        }
+                                            edited.push(char)
+                            }); 
+                            console.log(MatchNum2,edited)
+                            for(var cnt=0; cnt< MatchNum2.length; cnt++){
+                                textLine[i] = textLine[i].replace(MatchNum2[cnt],edited[cnt]);
+                            }
+                        }
+                }
+            }
+        // 配列をテキストに戻す
+        const setBody = textLine.slice( (BodyRange[0]) ,(BodyRange[1])+1 ).join('\r\n'); 
+        AfterHTML(setTitle,setBody); 
+        
+    }
+    // 切り出した文字列をテキストエリアに挿入
+        function AfterHTML(setTitle,setBody) {
+            document.getElementById("text2").value = document.getElementById("text2").value.replace('_title_',setTitle[0].value).replace('_content_',setBody);
+            var message = document.getElementById('setMessage');
+            message.style.display = 'block';
+            message.innerHTML = '<div class="message"><span class="correct">変換が完了しました。</span><p id="DLButton"><a href="#" id="getLocal" onClick="OutPutHTML()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M3 3a2 2 0 012-2h9.982a2 2 0 011.414.586l4.018 4.018A2 2 0 0121 7.018V21a2 2 0 01-2 2H4.75a.75.75 0 010-1.5H19a.5.5 0 00.5-.5V8.5h-4a2 2 0 01-2-2v-4H5a.5.5 0 00-.5.5v6.25a.75.75 0 01-1.5 0V3zm12-.5v4a.5.5 0 00.5.5h4a.5.5 0 00-.146-.336l-4.018-4.018A.5.5 0 0015 2.5zm-5.692 12l-2.104-2.236a.75.75 0 111.092-1.028l3.294 3.5a.75.75 0 010 1.028l-3.294 3.5a.75.75 0 11-1.092-1.028L9.308 16H4.09a2.59 2.59 0 00-2.59 2.59v3.16a.75.75 0 01-1.5 0v-3.16a4.09 4.09 0 014.09-4.09h5.218z"></path></svg>ダウンロード</a></p></div>'
+        }
+   
+    },false);
+
+    //HTML出力
+    function OutPutHTML(){
+            var l = 8;
+
+            // DL用文字セット
+            var c = "abcdefghijklmnopqrstuvwxyz0123456789";
+            var cl = c.length;
+            var r = "";
+            for(var i=0; i<l; i++){
+                r += c[Math.floor(Math.random()*cl)];
+            }
+            var putData = document.getElementById("text2").value;
+            var title = 'DL_' + r + '.html';
+            var linkTagId = 'getLocal';
+            var linkTag = document.getElementById(linkTagId);
+            var linkTagAttr =  ['href','download'];
+            
+            var msSave = window.navigator;
+            
+            var htmlData = new Blob([putData], { type: "text/plain;charset=UTF-8" });
+            var objectURL = window.URL.createObjectURL(htmlData);   
+            
+            var UA = window.navigator.userAgent.toLowerCase();
+            
+            if(UA.indexOf('msie') != -1 || UA.indexOf('trident') != -1) {
+                            // IEの時はmsSaveOrOpenBlobかmsSaveBlobを利用します。
+                window.navigator.msSaveOrOpenBlob(stringObject, title); 
+            } else {
+                linkTag.setAttribute(linkTagAttr[0],objectURL);
+                linkTag.setAttribute(linkTagAttr[1],title); 
+            } 
+        } 
+
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

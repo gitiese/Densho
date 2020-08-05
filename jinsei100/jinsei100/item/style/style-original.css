@@ -1,0 +1,252 @@
+@charset "UTF-8";
+
+
+/* 目次リストスタイル
+---------------------------------------------------------------- */
+.contents_list {
+  list-style-type: none;
+}
+
+
+/* スタンダード左右中央表現
+---------------------------------------------------------------- */
+/* 横組み用 */
+/* span */
+.v-valign-height {
+  display: inline-block;
+  -epub-writing-mode: vertical-rl;
+  vertical-align: middle;
+  height: 100%;
+}
+/* div */
+.inline-width {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* 縦組み用 */
+/* span */
+.h-valign-width {
+  display: inline-block;
+  -epub-writing-mode: horizontal-tb;
+  vertical-align: middle;
+  width: 100%;
+}
+/* div */
+.inline-height {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+
+/* 見出し
+---------------------------------------------------------------- */
+
+
+/* 括弧内フォントサイズ
+---------------------------------------------------------------- */
+.kakko {
+  font-size: 85%;
+}
+
+
+/* 引用
+---------------------------------------------------------------- */
+.inyou {
+  margin-top: 2em;
+}
+
+/* 引用元
+---------------------------------------------------------------- */
+.refSource {
+    text-align: right;
+    font-size: .76em;
+}
+
+/* 割注
+---------------------------------------------------------------- */
+.warichu {
+  font-size: 70%;
+}
+
+/* 強調
+---------------------------------------------------------------- */
+.emp {
+    display: inline-block;
+	font-weight: bold;
+    padding: 4em 1em;
+}
+/* 箇条書き
+---------------------------------------------------------------- */
+.list {
+    display: block;
+    padding: 3em 0 0;
+}
+.list:before {
+    content: '';
+    display: inline-block;
+    margin: -2em 0 0;
+    width: 1px;
+    height: 1px;
+}
+
+/* 脚注
+---------------------------------------------------------------- */
+
+
+/* 罫線
+---------------------------------------------------------------- */
+.keisen {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+/* 目次--章囲み
+---------------------------------------------------------------- */
+.chapter_box {
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* 目次--章罫線
+---------------------------------------------------------------- */
+.chapter_keisen {
+  border-right: 1px solid;
+  border-left: 1px solid;
+  padding: 5px;
+  font-size: 80%;
+  font-weight: bold;
+}
+
+/* 本文--見出し罫線
+---------------------------------------------------------------- */
+.Head_keisen {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  font-size: 1.2em;
+  padding: 3em 1em 0 1em;
+  margin: 0 1.5em;
+  letter-spacing: 0.4em;
+  font-weight: bold;
+  font-family: "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN W3", "ＭＳ ゴシック", "MS Gothic", sans-serif;
+}
+.Head_keisen .tcy {
+  width: 1em;
+  display: inline-block;
+}
+
+/* 本文--黒囲み数字 - 小
+---------------------------------------------------------------- */
+.list_num--b_box_s {
+    background: black;
+    color: #fff;
+    height: 1em;
+    width: 1em;
+    padding: 0.3em;
+    font-size: .8em;
+    font-weight: bold;
+    border-radius: 4px;
+    font-family: "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN W3", "ＭＳ ゴシック", "MS Gothic", sans-serif;
+  }
+
+/* 本文--黒囲み数字 - 大
+---------------------------------------------------------------- */
+.list_num--b_box_l {
+    background: black;
+    color: #fff;
+    height: 1em;
+    width: 1em;
+    padding: 0.3em .3em .3em .1em;
+    font-size: 1em;
+    letter-spacing: 0;
+    font-weight: bold;
+    border-radius: 4px;
+  }
+
+  /* 本文--見出し大
+---------------------------------------------------------------- */
+.text{
+  letter-spacing: 0.4em;
+  font-weight: bold;
+}
+
+  /* 本文--リスト
+---------------------------------------------------------------- */
+.list-indent{
+    text-indent: -1em;
+    margin: 3em 0 0;
+}
+
+/* 脚注
+---------------------------------------------------------------- */
+.kyakuchu {
+  text-indent: -3em;
+  margin: 8em 0 0 0;
+}
+.kyakuchu-l2 {
+  margin: 8em 0 0 0;
+}
+
+/* 背景色
+---------------------------------------------------------------- */
+.bg-color {
+  background-color: #f5f5f5;
+  padding: 2em;
+}
+
+
+/* 傍点
+---------------------------------------------------------------- */
+.bouten{
+  -webkit-text-emphasis-style: filled;
+}
+
+/* ダッシュ
+---------------------------------------------------------------- */
+.dashed {
+    padding: 0 0 .4em 0;
+    letter-spacing: -0.2em;
+}
+
+/* 外部リンク用　リンクライン表示
+---------------------------------------------------------------- */
+/* Kindle epub側のリンクラインを非表示 */
+/*@media amzn-kf8
+{
+  a {
+    text-decoration: none !important;
+  }
+
+  .hanguru {
+    -webkit-text-combine:         horizontal;
+    -webkit-text-combine-upright: all;
+    text-combine-upright:         all;
+    -epub-text-combine:           horizontal;
+  }
+
+  .h-external-link-bottom {
+    border-bottom: 1px solid !important;
+  }
+}
+
+.v-external-link-left {
+  text-decoration: none !important;
+  border-right: none !important;
+  border-left: 1px solid !important;
+}
+
+.v-external-link-right {
+  border-right: 1px solid !important;
+  border-left: none !important;
+}
+
+.h-external-link-left
+.h-external-link-right {
+  border-bottom: 1px solid !important;
+}*/

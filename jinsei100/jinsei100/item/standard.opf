@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package
+ xmlns="http://www.idpf.org/2007/opf"
+ version="3.0"
+ xml:lang="ja"
+ unique-identifier="isbn"
+ prefix="ebpaj: http://www.ebpaj.jp/
+         ibooks: http://vocabulary.itunes.apple.com/rdf/ibooks/vocabulary-extensions-1.0/"
+>
+
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<!-- 作品名 -->
+<dc:title id="title">人生100年時代の養生訓　長寿がもたらす難問を解く</dc:title>
+<meta refines="#title" property="file-as">ジンセイヒャクネンジダイノヨウジョウクン チョウジュガモタラスナンモンヲトク</meta>
+
+<!-- 著者名 -->
+<dc:creator id="creator01">秋山和宏</dc:creator>
+<meta refines="#creator01" property="role" scheme="marc:relators">aut</meta>
+<meta refines="#creator01" property="file-as">あきやま　かずひろ</meta>
+<meta refines="#creator01" property="display-seq">1</meta>
+
+
+<!-- 出版社名 -->
+<dc:publisher id="publisher">亜紀書房</dc:publisher>
+<meta refines="#publisher" property="file-as">アキショボウ</meta>
+
+<!-- 言語 -->
+<dc:language>ja</dc:language>
+
+<!-- ファイルid -->
+<dc:identifier id="isbn">978-4-7505-1647-9</dc:identifier>
+
+<!-- 更新日 -->
+<meta property="dcterms:modified">2020-07-15T00:00:00Z</meta>
+
+<!-- etc. -->
+<meta property="ebpaj:guide-version">1.1.3</meta>
+
+<meta property="ibooks:specified-fonts">true</meta>
+<meta property="ibooks:version">1.0</meta>
+
+</metadata>
+
+<manifest>
+
+<!-- navigation -->
+<item media-type="application/xhtml+xml" id="toc" href="navigation-documents.xhtml" properties="nav"/>
+
+<!-- style -->
+<item media-type="text/css" id="book-style"     href="style/book-style.css"/>
+<item media-type="text/css" id="style-reset"    href="style/style-reset.css"/>
+<item media-type="text/css" id="style-standard" href="style/style-standard.css"/>
+<item media-type="text/css" id="style-advance"  href="style/style-advance.css"/>
+<item media-type="text/css" id="style-check"    href="style/style-check.css"/>
+<item media-type="text/css" id="style-original" href="style/style-original.css"/>
+
+<!-- image -->
+<item media-type="image/jpeg" id="cover"                 href="image/cover.jpg" properties="cover-image"/>
+
+<item media-type="image/jpeg" id="img_hontobira"         href="image/img_hontobira.jpg"/>
+<item media-type="image/jpeg" id="img_tobira_001"        href="image/img_tobira_001.jpg"/>
+<item media-type="image/jpeg" id="img_tobira_002"        href="image/img_tobira_002.jpg"/>
+<item media-type="image/jpeg" id="img_p002-01"            href="image/img_p002-01.jpg"/>
+<item media-type="image/jpeg" id="img_p002-02"            href="image/img_p002-02.jpg"/>
+<item media-type="image/jpeg" id="img_p002-03"            href="image/img_p002-03.jpg"/>
+<item media-type="image/jpeg" id="img_tobira_003"        href="image/img_tobira_003.jpg"/>
+<item media-type="image/jpeg" id="img_p003-01"            href="image/img_p003-01.jpg"/>
+<item media-type="image/jpeg" id="img_p003-02"            href="image/img_p003-02.jpg"/>
+<item media-type="image/jpeg" id="img_p003-03"            href="image/img_p003-03.jpg"/>
+<item media-type="image/jpeg" id="img_p003-04"            href="image/img_p003-04.jpg"/>
+<item media-type="image/jpeg" id="img_p003-05"            href="image/img_p003-05.jpg"/>
+<item media-type="image/jpeg" id="img_tobira_004"        href="image/img_tobira_004.jpg"/>
+<item media-type="image/jpeg" id="img_p004-01"            href="image/img_p004-01.jpg"/>
+<item media-type="image/jpeg" id="img_p004-02"            href="image/img_p004-02.jpg"/>
+<item media-type="image/jpeg" id="img_tobira_005"        href="image/img_tobira_005.jpg"/>
+<item media-type="image/jpeg" id="img_p005-01"            href="image/img_p005-01.jpg"/>
+<item media-type="image/jpeg" id="img_p005-02"            href="image/img_p005-02.jpg"/>
+<item media-type="image/jpeg" id="img_p005-03"            href="image/img_p005-03.jpg"/>
+<item media-type="image/jpeg" id="img_p005-04"            href="image/img_p005-04.jpg"/>
+<item media-type="image/jpeg" id="img_p005-05"            href="image/img_p005-05.jpg"/>
+<item media-type="image/jpeg" id="img_tobira_006"        href="image/img_tobira_006.jpg"/>
+
+<!-- xhtml -->
+
+<item media-type="application/xhtml+xml" id="p_cover"         href="xhtml/p_cover.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_hontobira"     href="xhtml/p_hontobira.xhtml"/>
+<item media-type="application/xhtml+xml" id="contents"        href="xhtml/contents.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_000"           href="xhtml/p_000.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="contents_tobira" href="xhtml/contents_tobira.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_001_tobira"    href="xhtml/p_001_tobira.xhtml"/>
+<item media-type="application/xhtml+xml" id="p_001"           href="xhtml/p_001.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_002_tobira"    href="xhtml/p_002_tobira.xhtml"/>
+<item media-type="application/xhtml+xml" id="p_002"           href="xhtml/p_002.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_003_tobira"    href="xhtml/p_003_tobira.xhtml"/>
+<item media-type="application/xhtml+xml" id="p_003"           href="xhtml/p_003.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_004_tobira"    href="xhtml/p_004_tobira.xhtml"/>
+<item media-type="application/xhtml+xml" id="p_004"           href="xhtml/p_004.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_005_tobira"    href="xhtml/p_005_tobira.xhtml"/>
+<item media-type="application/xhtml+xml" id="p_005"           href="xhtml/p_005.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_006_tobira"    href="xhtml/p_006_tobira.xhtml"/>
+<item media-type="application/xhtml+xml" id="p_006"           href="xhtml/p_006.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_007"           href="xhtml/p_007.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="p_008"           href="xhtml/p_008.xhtml"/>
+
+<item media-type="application/xhtml+xml" id="okuzuke"         href="xhtml/okuzuke.xhtml"/>
+
+</manifest>
+
+
+<spine page-progression-direction="rtl">
+
+<itemref linear="yes" idref="p_cover"    properties="page-spread-left"/>
+
+<itemref linear="yes" idref="p_hontobira"/>
+<itemref linear="yes" idref="contents"/>
+
+<itemref linear="yes" idref="p_000"/>
+
+<itemref linear="yes" idref="contents_tobira"/>
+
+<itemref linear="yes" idref="p_001_tobira"/>
+<itemref linear="yes" idref="p_001"/>
+
+<itemref linear="yes" idref="p_002_tobira"/>
+<itemref linear="yes" idref="p_002"/>
+
+<itemref linear="yes" idref="p_003_tobira"/>
+<itemref linear="yes" idref="p_003"/>
+
+<itemref linear="yes" idref="p_004_tobira"/>
+<itemref linear="yes" idref="p_004"/>
+
+<itemref linear="yes" idref="p_005_tobira"/>
+<itemref linear="yes" idref="p_005"/>
+
+<itemref linear="yes" idref="p_006_tobira"/>
+<itemref linear="yes" idref="p_006"/>
+
+<itemref linear="yes" idref="p_007"/>
+
+<itemref linear="yes" idref="p_008"/>
+
+<itemref linear="yes" idref="okuzuke"/>
+
+</spine>
+
+</package>
